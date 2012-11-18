@@ -1,0 +1,13 @@
+
+.DS_Store
+
+.ensime
+
+.ensime_lucene/*
+
+.gradle/*
+.ensime_session
+
+*.jar
+
+build/*
