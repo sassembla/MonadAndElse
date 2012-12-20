@@ -1,5 +1,6 @@
 /**
  * stateモナドについて理解したい。
+ * このコードを段階的に書き出して、死霊化する。
  */
 
 /**
@@ -31,25 +32,25 @@ case class MyState[TState, +T](f: TState => (T, TState)) {
 }
 
 class StateMain {
+  println("getに来てる")
   def get[TState] = MyState((state: TState) => (state, state))
+  println("putに来てる")
   def put[TState](state: TState) = MyState((_: TState) => ((), state))
 
+  println("mainに来てる")
   def main(args: Array[String]) :Unit = {
     val resultF = {
-      
-      // println("resultFに来てる  "+initVal)
-      
-
+      println("resultFに来てる")
       val ret = for {
         initVal <- get[Int]
         x = initVal + 1
         _ <- put(x * 2)
       } yield x
 
-      println("ret = "+ret)
+      println("retは "+ret)
       ret
     }
-    
+    println("プリントに来てる")
     println(resultF(0))
     // println(resultF(10))
     // println(resultF(10))
